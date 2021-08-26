@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AragonClassLibrary", "AragonClassLibrary.csproj", "{555A2273-4488-45B1-9974-230259EA8FBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AragonApp", "..\AragonApp\AragonApp.csproj", "{FE28B720-EAE9-4858-8E21-A8B654C31CD1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{555A2273-4488-45B1-9974-230259EA8FBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{555A2273-4488-45B1-9974-230259EA8FBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{555A2273-4488-45B1-9974-230259EA8FBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{555A2273-4488-45B1-9974-230259EA8FBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE28B720-EAE9-4858-8E21-A8B654C31CD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE28B720-EAE9-4858-8E21-A8B654C31CD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE28B720-EAE9-4858-8E21-A8B654C31CD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE28B720-EAE9-4858-8E21-A8B654C31CD1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83164D60-D4B5-46C9-B876-CB7ECA544112}
+	EndGlobalSection
+EndGlobal

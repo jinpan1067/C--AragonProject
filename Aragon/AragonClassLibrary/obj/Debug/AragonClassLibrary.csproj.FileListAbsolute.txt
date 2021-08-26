@@ -1,0 +1,12 @@
+C:\Users\xiaoqiu\Desktop\DotNet_CS\AragonClassLibrary\bin\Debug\AragonClassLibrary.dll.config
+C:\Users\xiaoqiu\Desktop\DotNet_CS\AragonClassLibrary\bin\Debug\AragonClassLibrary.dll
+C:\Users\xiaoqiu\Desktop\DotNet_CS\AragonClassLibrary\bin\Debug\AragonClassLibrary.pdb
+C:\Users\xiaoqiu\Desktop\DotNet_CS\AragonClassLibrary\bin\Debug\EntityFramework.dll
+C:\Users\xiaoqiu\Desktop\DotNet_CS\AragonClassLibrary\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\xiaoqiu\Desktop\DotNet_CS\AragonClassLibrary\bin\Debug\EntityFramework.xml
+C:\Users\xiaoqiu\Desktop\DotNet_CS\AragonClassLibrary\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\xiaoqiu\Desktop\DotNet_CS\AragonClassLibrary\obj\Debug\AragonClassLibrary.csproj.AssemblyReference.cache
+C:\Users\xiaoqiu\Desktop\DotNet_CS\AragonClassLibrary\obj\Debug\AragonClassLibrary.csproj.CoreCompileInputs.cache
+C:\Users\xiaoqiu\Desktop\DotNet_CS\AragonClassLibrary\obj\Debug\AragonClassLibrary.csproj.CopyComplete
+C:\Users\xiaoqiu\Desktop\DotNet_CS\AragonClassLibrary\obj\Debug\AragonClassLibrary.dll
+C:\Users\xiaoqiu\Desktop\DotNet_CS\AragonClassLibrary\obj\Debug\AragonClassLibrary.pdb

@@ -1,0 +1,931 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AragonPharmarcyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblClinic">
+          <Key>
+            <PropertyRef Name="ClinicID" />
+          </Key>
+          <Property Name="ClinicID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClinicName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Province" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="Postalcode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblDoctor">
+          <Key>
+            <PropertyRef Name="DoctorID" />
+          </Key>
+          <Property Name="DoctorID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorFirst" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="DoctorLast" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Cell" Type="nvarchar" MaxLength="15" />
+          <Property Name="ClinicID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblClass">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Cost" Type="money" Nullable="false" />
+          <Property Name="Renewal" Type="tinyint" Nullable="false" />
+          <Property Name="Required" Type="bit" Nullable="false" />
+          <Property Name="Provider" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblEmployee">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpFirst" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="EmpMI" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="EmpLast" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="SINs" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="DOB" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="StartDate" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="EndDate" Type="varchar" MaxLength="30" />
+          <Property Name="Address" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Province" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="JobID" Type="tinyint" Nullable="false" />
+          <Property Name="Memo" Type="nvarchar" MaxLength="255" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Cell" Type="nvarchar" MaxLength="15" />
+          <Property Name="Salary" Type="money" />
+          <Property Name="HourlyRate" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="ReviewDate" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="tblEmployeeTraining">
+          <Key>
+            <PropertyRef Name="EmpID" />
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="EmpID" Type="smallint" Nullable="false" />
+          <Property Name="Date" Type="varchar" MaxLength="30" />
+          <Property Name="ClassID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblJobtitle">
+          <Key>
+            <PropertyRef Name="JobID" />
+          </Key>
+          <Property Name="JobID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblDrug">
+          <Key>
+            <PropertyRef Name="DIN" />
+          </Key>
+          <Property Name="DIN" Type="nchar" MaxLength="8" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Generic" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Dosage" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="DosageForm" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Cost" Type="money" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="fee" Type="money" Nullable="false" />
+          <Property Name="Interactions" Type="nvarchar" MaxLength="50" />
+          <Property Name="Supplier" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblRefill">
+          <Key>
+            <PropertyRef Name="PrescriptionID" />
+            <PropertyRef Name="RefillDate" />
+          </Key>
+          <Property Name="PrescriptionID" Type="smallint" Nullable="false" />
+          <Property Name="RefillDate" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="EmpID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblRx">
+          <Key>
+            <PropertyRef Name="PrescriptionID" />
+          </Key>
+          <Property Name="PrescriptionID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DIN" Type="nchar" MaxLength="8" Nullable="false" />
+          <Property Name="Quantity" Type="tinyint" Nullable="false" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Date" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ExpireDate" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Refills" Type="tinyint" />
+          <Property Name="AutoRefill" Type="bit" />
+          <Property Name="RefillsUsed" Type="tinyint" />
+          <Property Name="Instructions" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustID" Type="int" Nullable="false" />
+          <Property Name="DoctorID" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCustomer">
+          <Key>
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="CustID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustFirst" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="CustLast" Type="nvarchar" MaxLength="30" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="DOB" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Balance" Type="money" Nullable="false" />
+          <Property Name="ChildproofCap" Type="bit" Nullable="false" />
+          <Property Name="PlanID" Type="nvarchar" MaxLength="50" />
+          <Property Name="HouseID" Type="smallint" Nullable="false" />
+          <Property Name="HeadHH" Type="bit" />
+          <Property Name="Allergies" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblHealthPlan">
+          <Key>
+            <PropertyRef Name="PlanID" />
+          </Key>
+          <Property Name="PlanID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PlanName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Province" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Days" Type="tinyint" Nullable="false" />
+          <Property Name="WebSite" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblHousehold">
+          <Key>
+            <PropertyRef Name="HouseID" />
+          </Key>
+          <Property Name="HouseID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Province" Type="nchar" MaxLength="2" Nullable="false" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_tblCustomer_tblHealthPlan">
+          <End Role="tblHealthPlan" Type="Self.tblHealthPlan" Multiplicity="0..1" />
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblHealthPlan">
+              <PropertyRef Name="PlanID" />
+            </Principal>
+            <Dependent Role="tblCustomer">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblCustomer_tblHousehold">
+          <End Role="tblHousehold" Type="Self.tblHousehold" Multiplicity="1" />
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblHousehold">
+              <PropertyRef Name="HouseID" />
+            </Principal>
+            <Dependent Role="tblCustomer">
+              <PropertyRef Name="HouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblDoctor_tblClinic">
+          <End Role="tblClinic" Type="Self.tblClinic" Multiplicity="1" />
+          <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblClinic">
+              <PropertyRef Name="ClinicID" />
+            </Principal>
+            <Dependent Role="tblDoctor">
+              <PropertyRef Name="ClinicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblEmployee_tblJobTitle">
+          <End Role="tblJobtitle" Type="Self.tblJobtitle" Multiplicity="1" />
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblJobtitle">
+              <PropertyRef Name="JobID" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblEmployeeTraining_tblClass">
+          <End Role="tblClass" Type="Self.tblClass" Multiplicity="1" />
+          <End Role="tblEmployeeTraining" Type="Self.tblEmployeeTraining" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblClass">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="tblEmployeeTraining">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblEmployeeTraining_tblEmployee">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="1" />
+          <End Role="tblEmployeeTraining" Type="Self.tblEmployeeTraining" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="tblEmployeeTraining">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblRefill_tblEmployee">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="1" />
+          <End Role="tblRefill" Type="Self.tblRefill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="tblRefill">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblRefill_tblRx">
+          <End Role="tblRx" Type="Self.tblRx" Multiplicity="1" />
+          <End Role="tblRefill" Type="Self.tblRefill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRx">
+              <PropertyRef Name="PrescriptionID" />
+            </Principal>
+            <Dependent Role="tblRefill">
+              <PropertyRef Name="PrescriptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblRx_tblCustomer">
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="1" />
+          <End Role="tblRx" Type="Self.tblRx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="CustID" />
+            </Principal>
+            <Dependent Role="tblRx">
+              <PropertyRef Name="CustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblRx_tblDoctor">
+          <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="1" />
+          <End Role="tblRx" Type="Self.tblRx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="tblRx">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblRx_tblDrug">
+          <End Role="tblDrug" Type="Self.tblDrug" Multiplicity="1" />
+          <End Role="tblRx" Type="Self.tblRx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDrug">
+              <PropertyRef Name="DIN" />
+            </Principal>
+            <Dependent Role="tblRx">
+              <PropertyRef Name="DIN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AragonPharmarcyModelStoreContainer">
+          <EntitySet Name="tblClinic" EntityType="Self.tblClinic" Schema="Doctors" store:Type="Tables" />
+          <EntitySet Name="tblDoctor" EntityType="Self.tblDoctor" Schema="Doctors" store:Type="Tables" />
+          <EntitySet Name="tblClass" EntityType="Self.tblClass" Schema="HumanResources" store:Type="Tables" />
+          <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="HumanResources" store:Type="Tables" />
+          <EntitySet Name="tblEmployeeTraining" EntityType="Self.tblEmployeeTraining" Schema="HumanResources" store:Type="Tables" />
+          <EntitySet Name="tblJobtitle" EntityType="Self.tblJobtitle" Schema="HumanResources" store:Type="Tables" />
+          <EntitySet Name="tblDrug" EntityType="Self.tblDrug" Schema="Prescription" store:Type="Tables" />
+          <EntitySet Name="tblRefill" EntityType="Self.tblRefill" Schema="Prescription" store:Type="Tables" />
+          <EntitySet Name="tblRx" EntityType="Self.tblRx" Schema="Prescription" store:Type="Tables" />
+          <EntitySet Name="tblCustomer" EntityType="Self.tblCustomer" Schema="Sales" store:Type="Tables" />
+          <EntitySet Name="tblHealthPlan" EntityType="Self.tblHealthPlan" Schema="Sales" store:Type="Tables" />
+          <EntitySet Name="tblHousehold" EntityType="Self.tblHousehold" Schema="Sales" store:Type="Tables" />
+          <AssociationSet Name="fk_tblCustomer_tblHealthPlan" Association="Self.fk_tblCustomer_tblHealthPlan">
+            <End Role="tblHealthPlan" EntitySet="tblHealthPlan" />
+            <End Role="tblCustomer" EntitySet="tblCustomer" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblCustomer_tblHousehold" Association="Self.fk_tblCustomer_tblHousehold">
+            <End Role="tblHousehold" EntitySet="tblHousehold" />
+            <End Role="tblCustomer" EntitySet="tblCustomer" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblDoctor_tblClinic" Association="Self.fk_tblDoctor_tblClinic">
+            <End Role="tblClinic" EntitySet="tblClinic" />
+            <End Role="tblDoctor" EntitySet="tblDoctor" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblEmployee_tblJobTitle" Association="Self.fk_tblEmployee_tblJobTitle">
+            <End Role="tblJobtitle" EntitySet="tblJobtitle" />
+            <End Role="tblEmployee" EntitySet="tblEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblEmployeeTraining_tblClass" Association="Self.fk_tblEmployeeTraining_tblClass">
+            <End Role="tblClass" EntitySet="tblClass" />
+            <End Role="tblEmployeeTraining" EntitySet="tblEmployeeTraining" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblEmployeeTraining_tblEmployee" Association="Self.fk_tblEmployeeTraining_tblEmployee">
+            <End Role="tblEmployee" EntitySet="tblEmployee" />
+            <End Role="tblEmployeeTraining" EntitySet="tblEmployeeTraining" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblRefill_tblEmployee" Association="Self.fk_tblRefill_tblEmployee">
+            <End Role="tblEmployee" EntitySet="tblEmployee" />
+            <End Role="tblRefill" EntitySet="tblRefill" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblRefill_tblRx" Association="Self.fk_tblRefill_tblRx">
+            <End Role="tblRx" EntitySet="tblRx" />
+            <End Role="tblRefill" EntitySet="tblRefill" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblRx_tblCustomer" Association="Self.fk_tblRx_tblCustomer">
+            <End Role="tblCustomer" EntitySet="tblCustomer" />
+            <End Role="tblRx" EntitySet="tblRx" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblRx_tblDoctor" Association="Self.fk_tblRx_tblDoctor">
+            <End Role="tblDoctor" EntitySet="tblDoctor" />
+            <End Role="tblRx" EntitySet="tblRx" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblRx_tblDrug" Association="Self.fk_tblRx_tblDrug">
+            <End Role="tblDrug" EntitySet="tblDrug" />
+            <End Role="tblRx" EntitySet="tblRx" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AragonPharmarcyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblClinic">
+          <Key>
+            <PropertyRef Name="ClinicID" />
+          </Key>
+          <Property Name="ClinicID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClinicName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address1" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address2" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Province" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Postalcode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblDoctors" Relationship="Self.fk_tblDoctor_tblClinic" FromRole="tblClinic" ToRole="tblDoctor" />
+        </EntityType>
+        <EntityType Name="tblDoctor">
+          <Key>
+            <PropertyRef Name="DoctorID" />
+          </Key>
+          <Property Name="DoctorID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorFirst" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DoctorLast" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cell" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ClinicID" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="tblClinic" Relationship="Self.fk_tblDoctor_tblClinic" FromRole="tblDoctor" ToRole="tblClinic" />
+          <NavigationProperty Name="tblRxes" Relationship="Self.fk_tblRx_tblDoctor" FromRole="tblDoctor" ToRole="tblRx" />
+        </EntityType>
+        <EntityType Name="tblClass">
+          <Key>
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="ClassID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Renewal" Type="Byte" Nullable="false" />
+          <Property Name="Required" Type="Boolean" Nullable="false" />
+          <Property Name="Provider" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblEmployeeTrainings" Relationship="Self.fk_tblEmployeeTraining_tblClass" FromRole="tblClass" ToRole="tblEmployeeTraining" />
+        </EntityType>
+        <EntityType Name="tblEmployee">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpFirst" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmpMI" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="EmpLast" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SINs" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DOB" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StartDate" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EndDate" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Province" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JobID" Type="Byte" Nullable="false" />
+          <Property Name="Memo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cell" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="HourlyRate" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="ReviewDate" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblJobtitle" Relationship="Self.fk_tblEmployee_tblJobTitle" FromRole="tblEmployee" ToRole="tblJobtitle" />
+          <NavigationProperty Name="tblEmployeeTrainings" Relationship="Self.fk_tblEmployeeTraining_tblEmployee" FromRole="tblEmployee" ToRole="tblEmployeeTraining" />
+          <NavigationProperty Name="tblRefills" Relationship="Self.fk_tblRefill_tblEmployee" FromRole="tblEmployee" ToRole="tblRefill" />
+        </EntityType>
+        <EntityType Name="tblEmployeeTraining">
+          <Key>
+            <PropertyRef Name="EmpID" />
+            <PropertyRef Name="ClassID" />
+          </Key>
+          <Property Name="EmpID" Type="Int16" Nullable="false" />
+          <Property Name="Date" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ClassID" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="tblClass" Relationship="Self.fk_tblEmployeeTraining_tblClass" FromRole="tblEmployeeTraining" ToRole="tblClass" />
+          <NavigationProperty Name="tblEmployee" Relationship="Self.fk_tblEmployeeTraining_tblEmployee" FromRole="tblEmployeeTraining" ToRole="tblEmployee" />
+        </EntityType>
+        <EntityType Name="tblJobtitle">
+          <Key>
+            <PropertyRef Name="JobID" />
+          </Key>
+          <Property Name="JobID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblEmployees" Relationship="Self.fk_tblEmployee_tblJobTitle" FromRole="tblJobtitle" ToRole="tblEmployee" />
+        </EntityType>
+        <EntityType Name="tblDrug">
+          <Key>
+            <PropertyRef Name="DIN" />
+          </Key>
+          <Property Name="DIN" Type="String" MaxLength="8" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Generic" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Dosage" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="DosageForm" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="fee" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Interactions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Supplier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblRxes" Relationship="Self.fk_tblRx_tblDrug" FromRole="tblDrug" ToRole="tblRx" />
+        </EntityType>
+        <EntityType Name="tblRefill">
+          <Key>
+            <PropertyRef Name="PrescriptionID" />
+            <PropertyRef Name="RefillDate" />
+          </Key>
+          <Property Name="PrescriptionID" Type="Int16" Nullable="false" />
+          <Property Name="RefillDate" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmpID" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="tblEmployee" Relationship="Self.fk_tblRefill_tblEmployee" FromRole="tblRefill" ToRole="tblEmployee" />
+          <NavigationProperty Name="tblRx" Relationship="Self.fk_tblRefill_tblRx" FromRole="tblRefill" ToRole="tblRx" />
+        </EntityType>
+        <EntityType Name="tblRx">
+          <Key>
+            <PropertyRef Name="PrescriptionID" />
+          </Key>
+          <Property Name="PrescriptionID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DIN" Type="String" MaxLength="8" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Quantity" Type="Byte" Nullable="false" />
+          <Property Name="Unit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ExpireDate" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Refills" Type="Byte" />
+          <Property Name="AutoRefill" Type="Boolean" />
+          <Property Name="RefillsUsed" Type="Byte" />
+          <Property Name="Instructions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustID" Type="Int32" Nullable="false" />
+          <Property Name="DoctorID" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="tblDoctor" Relationship="Self.fk_tblRx_tblDoctor" FromRole="tblRx" ToRole="tblDoctor" />
+          <NavigationProperty Name="tblDrug" Relationship="Self.fk_tblRx_tblDrug" FromRole="tblRx" ToRole="tblDrug" />
+          <NavigationProperty Name="tblRefills" Relationship="Self.fk_tblRefill_tblRx" FromRole="tblRx" ToRole="tblRefill" />
+          <NavigationProperty Name="tblCustomer" Relationship="Self.fk_tblRx_tblCustomer" FromRole="tblRx" ToRole="tblCustomer" />
+        </EntityType>
+        <EntityType Name="tblCustomer">
+          <Key>
+            <PropertyRef Name="CustID" />
+          </Key>
+          <Property Name="CustID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustFirst" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustLast" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DOB" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="ChildproofCap" Type="Boolean" Nullable="false" />
+          <Property Name="PlanID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HouseID" Type="Int16" Nullable="false" />
+          <Property Name="HeadHH" Type="Boolean" />
+          <Property Name="Allergies" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblRxes" Relationship="Self.fk_tblRx_tblCustomer" FromRole="tblCustomer" ToRole="tblRx" />
+          <NavigationProperty Name="tblHealthPlan" Relationship="Self.fk_tblCustomer_tblHealthPlan" FromRole="tblCustomer" ToRole="tblHealthPlan" />
+          <NavigationProperty Name="tblHousehold" Relationship="Self.fk_tblCustomer_tblHousehold" FromRole="tblCustomer" ToRole="tblHousehold" />
+        </EntityType>
+        <EntityType Name="tblHealthPlan">
+          <Key>
+            <PropertyRef Name="PlanID" />
+          </Key>
+          <Property Name="PlanID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PlanName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Province" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Days" Type="Byte" Nullable="false" />
+          <Property Name="WebSite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCustomers" Relationship="Self.fk_tblCustomer_tblHealthPlan" FromRole="tblHealthPlan" ToRole="tblCustomer" />
+        </EntityType>
+        <EntityType Name="tblHousehold">
+          <Key>
+            <PropertyRef Name="HouseID" />
+          </Key>
+          <Property Name="HouseID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Province" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblCustomers" Relationship="Self.fk_tblCustomer_tblHousehold" FromRole="tblHousehold" ToRole="tblCustomer" />
+        </EntityType>
+        <Association Name="fk_tblDoctor_tblClinic">
+          <End Role="tblClinic" Type="Self.tblClinic" Multiplicity="1" />
+          <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblClinic">
+              <PropertyRef Name="ClinicID" />
+            </Principal>
+            <Dependent Role="tblDoctor">
+              <PropertyRef Name="ClinicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblRx_tblDoctor">
+          <End Role="tblDoctor" Type="Self.tblDoctor" Multiplicity="1" />
+          <End Role="tblRx" Type="Self.tblRx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDoctor">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="tblRx">
+              <PropertyRef Name="DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblEmployeeTraining_tblClass">
+          <End Role="tblClass" Type="Self.tblClass" Multiplicity="1" />
+          <End Role="tblEmployeeTraining" Type="Self.tblEmployeeTraining" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblClass">
+              <PropertyRef Name="ClassID" />
+            </Principal>
+            <Dependent Role="tblEmployeeTraining">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblEmployee_tblJobTitle">
+          <End Role="tblJobtitle" Type="Self.tblJobtitle" Multiplicity="1" />
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblJobtitle">
+              <PropertyRef Name="JobID" />
+            </Principal>
+            <Dependent Role="tblEmployee">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblEmployeeTraining_tblEmployee">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="1" />
+          <End Role="tblEmployeeTraining" Type="Self.tblEmployeeTraining" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="tblEmployeeTraining">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblRefill_tblEmployee">
+          <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="1" />
+          <End Role="tblRefill" Type="Self.tblRefill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEmployee">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="tblRefill">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblRx_tblDrug">
+          <End Role="tblDrug" Type="Self.tblDrug" Multiplicity="1" />
+          <End Role="tblRx" Type="Self.tblRx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDrug">
+              <PropertyRef Name="DIN" />
+            </Principal>
+            <Dependent Role="tblRx">
+              <PropertyRef Name="DIN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblRefill_tblRx">
+          <End Role="tblRx" Type="Self.tblRx" Multiplicity="1" />
+          <End Role="tblRefill" Type="Self.tblRefill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRx">
+              <PropertyRef Name="PrescriptionID" />
+            </Principal>
+            <Dependent Role="tblRefill">
+              <PropertyRef Name="PrescriptionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblRx_tblCustomer">
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="1" />
+          <End Role="tblRx" Type="Self.tblRx" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCustomer">
+              <PropertyRef Name="CustID" />
+            </Principal>
+            <Dependent Role="tblRx">
+              <PropertyRef Name="CustID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblCustomer_tblHealthPlan">
+          <End Role="tblHealthPlan" Type="Self.tblHealthPlan" Multiplicity="0..1" />
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblHealthPlan">
+              <PropertyRef Name="PlanID" />
+            </Principal>
+            <Dependent Role="tblCustomer">
+              <PropertyRef Name="PlanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tblCustomer_tblHousehold">
+          <End Role="tblHousehold" Type="Self.tblHousehold" Multiplicity="1" />
+          <End Role="tblCustomer" Type="Self.tblCustomer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblHousehold">
+              <PropertyRef Name="HouseID" />
+            </Principal>
+            <Dependent Role="tblCustomer">
+              <PropertyRef Name="HouseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AragonPharmarcyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblClinics" EntityType="Self.tblClinic" />
+          <EntitySet Name="tblDoctors" EntityType="Self.tblDoctor" />
+          <EntitySet Name="tblClasses" EntityType="Self.tblClass" />
+          <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
+          <EntitySet Name="tblEmployeeTrainings" EntityType="Self.tblEmployeeTraining" />
+          <EntitySet Name="tblJobtitles" EntityType="Self.tblJobtitle" />
+          <EntitySet Name="tblDrugs" EntityType="Self.tblDrug" />
+          <EntitySet Name="tblRefills" EntityType="Self.tblRefill" />
+          <EntitySet Name="tblRxes" EntityType="Self.tblRx" />
+          <EntitySet Name="tblCustomers" EntityType="Self.tblCustomer" />
+          <EntitySet Name="tblHealthPlans" EntityType="Self.tblHealthPlan" />
+          <EntitySet Name="tblHouseholds" EntityType="Self.tblHousehold" />
+          <AssociationSet Name="fk_tblDoctor_tblClinic" Association="Self.fk_tblDoctor_tblClinic">
+            <End Role="tblClinic" EntitySet="tblClinics" />
+            <End Role="tblDoctor" EntitySet="tblDoctors" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblRx_tblDoctor" Association="Self.fk_tblRx_tblDoctor">
+            <End Role="tblDoctor" EntitySet="tblDoctors" />
+            <End Role="tblRx" EntitySet="tblRxes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblEmployeeTraining_tblClass" Association="Self.fk_tblEmployeeTraining_tblClass">
+            <End Role="tblClass" EntitySet="tblClasses" />
+            <End Role="tblEmployeeTraining" EntitySet="tblEmployeeTrainings" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblEmployee_tblJobTitle" Association="Self.fk_tblEmployee_tblJobTitle">
+            <End Role="tblJobtitle" EntitySet="tblJobtitles" />
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblEmployeeTraining_tblEmployee" Association="Self.fk_tblEmployeeTraining_tblEmployee">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblEmployeeTraining" EntitySet="tblEmployeeTrainings" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblRefill_tblEmployee" Association="Self.fk_tblRefill_tblEmployee">
+            <End Role="tblEmployee" EntitySet="tblEmployees" />
+            <End Role="tblRefill" EntitySet="tblRefills" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblRx_tblDrug" Association="Self.fk_tblRx_tblDrug">
+            <End Role="tblDrug" EntitySet="tblDrugs" />
+            <End Role="tblRx" EntitySet="tblRxes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblRefill_tblRx" Association="Self.fk_tblRefill_tblRx">
+            <End Role="tblRx" EntitySet="tblRxes" />
+            <End Role="tblRefill" EntitySet="tblRefills" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblRx_tblCustomer" Association="Self.fk_tblRx_tblCustomer">
+            <End Role="tblCustomer" EntitySet="tblCustomers" />
+            <End Role="tblRx" EntitySet="tblRxes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblCustomer_tblHealthPlan" Association="Self.fk_tblCustomer_tblHealthPlan">
+            <End Role="tblHealthPlan" EntitySet="tblHealthPlans" />
+            <End Role="tblCustomer" EntitySet="tblCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tblCustomer_tblHousehold" Association="Self.fk_tblCustomer_tblHousehold">
+            <End Role="tblHousehold" EntitySet="tblHouseholds" />
+            <End Role="tblCustomer" EntitySet="tblCustomers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AragonPharmarcyModelStoreContainer" CdmEntityContainer="AragonPharmarcyEntities">
+          <EntitySetMapping Name="tblClinics">
+            <EntityTypeMapping TypeName="AragonPharmarcyModel.tblClinic">
+              <MappingFragment StoreEntitySet="tblClinic">
+                <ScalarProperty Name="ClinicID" ColumnName="ClinicID" />
+                <ScalarProperty Name="ClinicName" ColumnName="ClinicName" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="Postalcode" ColumnName="Postalcode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDoctors">
+            <EntityTypeMapping TypeName="AragonPharmarcyModel.tblDoctor">
+              <MappingFragment StoreEntitySet="tblDoctor">
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+                <ScalarProperty Name="DoctorFirst" ColumnName="DoctorFirst" />
+                <ScalarProperty Name="DoctorLast" ColumnName="DoctorLast" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Cell" ColumnName="Cell" />
+                <ScalarProperty Name="ClinicID" ColumnName="ClinicID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblClasses">
+            <EntityTypeMapping TypeName="AragonPharmarcyModel.tblClass">
+              <MappingFragment StoreEntitySet="tblClass">
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Renewal" ColumnName="Renewal" />
+                <ScalarProperty Name="Required" ColumnName="Required" />
+                <ScalarProperty Name="Provider" ColumnName="Provider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEmployees">
+            <EntityTypeMapping TypeName="AragonPharmarcyModel.tblEmployee">
+              <MappingFragment StoreEntitySet="tblEmployee">
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="EmpFirst" ColumnName="EmpFirst" />
+                <ScalarProperty Name="EmpMI" ColumnName="EmpMI" />
+                <ScalarProperty Name="EmpLast" ColumnName="EmpLast" />
+                <ScalarProperty Name="SINs" ColumnName="SINs" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Cell" ColumnName="Cell" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="HourlyRate" ColumnName="HourlyRate" />
+                <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEmployeeTrainings">
+            <EntityTypeMapping TypeName="AragonPharmarcyModel.tblEmployeeTraining">
+              <MappingFragment StoreEntitySet="tblEmployeeTraining">
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblJobtitles">
+            <EntityTypeMapping TypeName="AragonPharmarcyModel.tblJobtitle">
+              <MappingFragment StoreEntitySet="tblJobtitle">
+                <ScalarProperty Name="JobID" ColumnName="JobID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblDrugs">
+            <EntityTypeMapping TypeName="AragonPharmarcyModel.tblDrug">
+              <MappingFragment StoreEntitySet="tblDrug">
+                <ScalarProperty Name="DIN" ColumnName="DIN" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Generic" ColumnName="Generic" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Dosage" ColumnName="Dosage" />
+                <ScalarProperty Name="DosageForm" ColumnName="DosageForm" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="fee" ColumnName="fee" />
+                <ScalarProperty Name="Interactions" ColumnName="Interactions" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRefills">
+            <EntityTypeMapping TypeName="AragonPharmarcyModel.tblRefill">
+              <MappingFragment StoreEntitySet="tblRefill">
+                <ScalarProperty Name="PrescriptionID" ColumnName="PrescriptionID" />
+                <ScalarProperty Name="RefillDate" ColumnName="RefillDate" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRxes">
+            <EntityTypeMapping TypeName="AragonPharmarcyModel.tblRx">
+              <MappingFragment StoreEntitySet="tblRx">
+                <ScalarProperty Name="PrescriptionID" ColumnName="PrescriptionID" />
+                <ScalarProperty Name="DIN" ColumnName="DIN" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+                <ScalarProperty Name="Refills" ColumnName="Refills" />
+                <ScalarProperty Name="AutoRefill" ColumnName="AutoRefill" />
+                <ScalarProperty Name="RefillsUsed" ColumnName="RefillsUsed" />
+                <ScalarProperty Name="Instructions" ColumnName="Instructions" />
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+                <ScalarProperty Name="DoctorID" ColumnName="DoctorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustomers">
+            <EntityTypeMapping TypeName="AragonPharmarcyModel.tblCustomer">
+              <MappingFragment StoreEntitySet="tblCustomer">
+                <ScalarProperty Name="CustID" ColumnName="CustID" />
+                <ScalarProperty Name="CustFirst" ColumnName="CustFirst" />
+                <ScalarProperty Name="CustLast" ColumnName="CustLast" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="ChildproofCap" ColumnName="ChildproofCap" />
+                <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+                <ScalarProperty Name="HouseID" ColumnName="HouseID" />
+                <ScalarProperty Name="HeadHH" ColumnName="HeadHH" />
+                <ScalarProperty Name="Allergies" ColumnName="Allergies" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblHealthPlans">
+            <EntityTypeMapping TypeName="AragonPharmarcyModel.tblHealthPlan">
+              <MappingFragment StoreEntitySet="tblHealthPlan">
+                <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+                <ScalarProperty Name="PlanName" ColumnName="PlanName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Days" ColumnName="Days" />
+                <ScalarProperty Name="WebSite" ColumnName="WebSite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblHouseholds">
+            <EntityTypeMapping TypeName="AragonPharmarcyModel.tblHousehold">
+              <MappingFragment StoreEntitySet="tblHousehold">
+                <ScalarProperty Name="HouseID" ColumnName="HouseID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
